@@ -35,7 +35,7 @@ public class AuthenticationController : ControllerBase
             result.Id,
             result.UserName,
             result.Token);
-            
+
         return Ok(response);
     }
 }
