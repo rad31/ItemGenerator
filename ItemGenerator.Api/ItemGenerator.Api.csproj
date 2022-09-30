@@ -1,0 +1,29 @@
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
+
+  <PropertyGroup>
+    <TargetFramework>net7.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <ImplicitUsings>enable</ImplicitUsings>
+    <UserSecretsId>de6a8594-7378-4337-8666-4427c930d47f</UserSecretsId>
+  </PropertyGroup>
+
+  <PropertyGroup>
+    <SuppressNETCoreSdkPreviewMessage>true</SuppressNETCoreSdkPreviewMessage>
+  </PropertyGroup>
+  
+  <ItemGroup>
+    <PackageReference Include="Microsoft.AspNetCore.OpenApi" Version="7.0.0-rc.1.22427.2" />
+    <PackageReference Include="Swashbuckle.AspNetCore" Version="6.4.0" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\ItemGenerator.Contracts\ItemGenerator.Contracts.csproj" />
+    <ProjectReference Include="..\ItemGenerator.Application\ItemGenerator.Application.csproj" />
+    <ProjectReference Include="..\ItemGenerator.Infrastructure\ItemGenerator.Infrastructure.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <!-- <Using Include="ItemGenerator.Application.Services" /> -->
+  </ItemGroup>
+
+</Project>
