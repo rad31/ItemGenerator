@@ -1,11 +1,13 @@
-using System.Diagnostics;
-using System.Net;
+using ErrorOr;
+using ItemGenerator.Api.Common.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.Extensions.Options;
+using System.Diagnostics;
+using System.Net;
 
-namespace ItemGenerator.Api.Errors;
+namespace ItemGenerator.Api.Common.Errors;
 
 public class ItemGeneratorProblemDetailsFactory : ProblemDetailsFactory
 {
@@ -84,5 +86,9 @@ public class ItemGeneratorProblemDetailsFactory : ProblemDetailsFactory
         var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
         if (traceId is not null)
             problemDetails.Extensions.Add("traceId", traceId);
+
+        var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
+        if (errors is not null)
+            problemDetails.Extensions.Add("errorCodes", errors.Select(e => e.Code));
     }
 }

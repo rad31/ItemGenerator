@@ -1,11 +1,10 @@
 using System.Net;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
-using System.Data;
 
 namespace ItemGenerator.Api.Controllers;
 
-public class ErrorsController : ControllerBase
+public class ErrorsController : ApiController
 {
     [Route("/error")]
     public IActionResult Error()
@@ -15,11 +14,6 @@ public class ErrorsController : ControllerBase
         if (exception is null)
             return Problem();
 
-        if (exception is ArgumentException)
-            return ValidationProblem(title: exception.Message);
-        if (exception is DuplicateNameException)
-            return ValidationProblem(title: exception.Message, statusCode: (int)HttpStatusCode.Conflict);
-
-        return Problem(title: $"Unhandled exception type: {exception.GetType()}, {exception.Message}");
+        return Problem(statusCode: (int)HttpStatusCode.InternalServerError, title: exception.Message);
     }
 }

@@ -4,6 +4,6 @@ namespace ItemGenerator.Application.Common.Interfaces.Persistence;
 
 public interface IUserRepository
 {
-    User? GetUserByUserName(string userName);
+    User? GetUserByUsername(string username);
     void Add(User user);
 }

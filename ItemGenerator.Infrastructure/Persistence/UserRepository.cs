@@ -12,8 +12,8 @@ public class UserRepository : IUserRepository
         _users.Add(user);
     }
 
-    public User? GetUserByUserName(string userName)
+    public User? GetUserByUsername(string username)
     {
-        return _users.Find(u => u.UserName == userName);
+        return _users.Find(u => u.Username == username);
     }
 }

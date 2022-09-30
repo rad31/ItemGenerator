@@ -1,6 +1,6 @@
 namespace ItemGenerator.Contracts.Authentication;
 
 public record RegisterRequest(
-    string UserName,
+    string Username,
     string Password,
     string Email);

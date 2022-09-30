@@ -1,7 +1,8 @@
+using ErrorOr;
 using ItemGenerator.Application.Common.Interfaces.Authentication;
 using ItemGenerator.Application.Common.Interfaces.Persistence;
+using ItemGenerator.Domain.Common.Errors;
 using ItemGenerator.Domain.Entities;
-using System.Data;
 
 namespace ItemGenerator.Application.Services.Authentication;
 
@@ -16,15 +17,15 @@ public class AuthenticationService : IAuthenticationService
         _userRepository = userRepository;
     }
 
-    public AuthenticationResult Register(string userName, string password, string email)
+    public ErrorOr<AuthenticationResult> Register(string username, string password, string email)
     {
-        if (_userRepository.GetUserByUserName(userName) is not null)
-            throw new DuplicateNameException($"User {userName} already exists.");
+        if (_userRepository.GetUserByUsername(username) is not null)
+            return Errors.User.DuplicateUsername;
 
         var user = new User
         {
             Id = Guid.NewGuid(),
-            UserName = userName,
+            Username = username,
             Password = password,
             Email = email
         };
@@ -37,12 +38,12 @@ public class AuthenticationService : IAuthenticationService
             user,
             token);
     }
-    public AuthenticationResult Login(string userName, string password)
+    public ErrorOr<AuthenticationResult> Login(string username, string password)
     {
-        var user = _userRepository.GetUserByUserName(userName);
+        var user = _userRepository.GetUserByUsername(username);
 
         if (user is null || user.Password != password)
-            throw new ArgumentException("Unable to login with given username and password.");
+            return Errors.Authentication.InvalidCredentials;
 
         var token = _jwtTokenGenerator.GenerateToken(user);
 

@@ -1,4 +1,4 @@
-using ItemGenerator.Api.Errors;
+using ItemGenerator.Api.Common.Errors;
 using ItemGenerator.Application;
 using ItemGenerator.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
