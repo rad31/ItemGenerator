@@ -1,33 +1,55 @@
 using ItemGenerator.Application.Common.Interfaces.Authentication;
+using ItemGenerator.Application.Common.Interfaces.Persistence;
+using ItemGenerator.Domain.Entities;
 
 namespace ItemGenerator.Application.Services.Authentication;
 
 public class AuthenticationService : IAuthenticationService
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;
+    private readonly IUserRepository _userRepository;
 
-    public AuthenticationService(IJwtTokenGenerator jwtTokenGenerator)
+    public AuthenticationService(IJwtTokenGenerator jwtTokenGenerator, IUserRepository userRepository)
     {
         _jwtTokenGenerator = jwtTokenGenerator;
+        _userRepository = userRepository;
     }
 
-    public AuthenticationResult Login(string userName, string password)
+    public AuthenticationResult Register(string userName, string password, string email)
     {
-        // TODO: Check if user exists
+        if (_userRepository.GetUserByUserName(userName) is not null)
+            throw new Exception($"User {userName} already exists.");
 
-        Guid userId = Guid.NewGuid();
-        var token = _jwtTokenGenerator.GenerateToken(userId, userName);
+        var user = new User
+        {
+            Id = Guid.NewGuid(),
+            UserName = userName,
+            Password = password,
+            Email = email
+        };
+
+        _userRepository.Add(user);
+
+        var token = _jwtTokenGenerator.GenerateToken(user);
 
         return new AuthenticationResult(
-            userId,
-            userName,
+            user,
             token);
     }
-    public AuthenticationResult Register(string userName, string password)
+    public AuthenticationResult Login(string userName, string password)
     {
+        var user = _userRepository.GetUserByUserName(userName);
+
+        if (user is null)
+            throw new Exception("Unable to login with given username and password.");
+
+        if (user.Password != password)
+            throw new Exception("Unable to login with given username and password.");
+
+        var token = _jwtTokenGenerator.GenerateToken(user);
+
         return new AuthenticationResult(
-            Guid.NewGuid(),
-            userName,
-            Guid.NewGuid().ToString());
+            user,
+            token);
     }
 }

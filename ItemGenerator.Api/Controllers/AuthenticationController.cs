@@ -18,10 +18,11 @@ public class AuthenticationController : ControllerBase
     [HttpPost("register")]
     public IActionResult Register(RegisterRequest request)
     {
-        var result = _authenticationService.Register(request.UserName, request.Password);
+        var result = _authenticationService.Register(request.UserName, request.Password, request.Email);
         var response = new AuthenticationResponse(
-            result.Id,
-            result.UserName,
+            result.User.Id,
+            result.User.UserName,
+            result.User.Email,
             result.Token);
 
         return Ok(response);
@@ -32,8 +33,9 @@ public class AuthenticationController : ControllerBase
     {
         var result = _authenticationService.Login(request.UserName, request.Password);
         var response = new AuthenticationResponse(
-            result.Id,
-            result.UserName,
+            result.User.Id,
+            result.User.UserName,
+            result.User.Email,
             result.Token);
 
         return Ok(response);

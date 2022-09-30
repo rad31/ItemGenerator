@@ -1,6 +1,7 @@
+using ItemGenerator.Domain.Entities;
+
 namespace ItemGenerator.Application.Services.Authentication;
 
 public record AuthenticationResult(
-    Guid Id,
-    string UserName,
+    User User,
     string Token);
