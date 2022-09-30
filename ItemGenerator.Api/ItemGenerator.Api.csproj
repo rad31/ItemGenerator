@@ -22,8 +22,4 @@
     <ProjectReference Include="..\ItemGenerator.Infrastructure\ItemGenerator.Infrastructure.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <!-- <Using Include="ItemGenerator.Application.Services" /> -->
-  </ItemGroup>
-
 </Project>
