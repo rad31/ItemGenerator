@@ -84,10 +84,11 @@ public class ItemGeneratorProblemDetailsFactory : ProblemDetailsFactory
         }
 
         var traceId = Activity.Current?.Id ?? httpContext?.TraceIdentifier;
+        var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
+
         if (traceId is not null)
             problemDetails.Extensions.Add("traceId", traceId);
 
-        var errors = httpContext?.Items[HttpContextItemKeys.Errors] as List<Error>;
         if (errors is not null)
             problemDetails.Extensions.Add("errorCodes", errors.Select(e => e.Code));
     }

@@ -1,16 +1,13 @@
-using ItemGenerator.Api.Common.Errors;
+using ItemGenerator.Api;
 using ItemGenerator.Application;
 using ItemGenerator.Infrastructure;
-using Microsoft.AspNetCore.Mvc.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 {
-    builder.Services.AddApplication();
-    builder.Services.AddInfrastructure(builder.Configuration);
-    builder.Services.AddControllers();
-    builder.Services.AddEndpointsApiExplorer();
-    builder.Services.AddSwaggerGen();
-    builder.Services.AddSingleton<ProblemDetailsFactory, ItemGeneratorProblemDetailsFactory>();
+    builder.Services
+        .AddPresentation()
+        .AddApplication()
+        .AddInfrastructure(builder.Configuration);
 }
 
 var app = builder.Build();
@@ -24,7 +21,8 @@ if (app.Environment.IsDevelopment())
 {
     app.UseExceptionHandler("/error");
     app.UseHttpsRedirection();
-    // app.UseAuthorization();
+    app.UseAuthentication();
+    app.UseAuthorization();
     app.MapControllers();
     app.Run();
 }

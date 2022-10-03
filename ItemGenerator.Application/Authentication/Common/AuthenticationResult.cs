@@ -1,6 +1,6 @@
 using ItemGenerator.Domain.Entities;
 
-namespace ItemGenerator.Application.Services.Authentication;
+namespace ItemGenerator.Application.Authentication.Common;
 
 public record AuthenticationResult(
     User User,
