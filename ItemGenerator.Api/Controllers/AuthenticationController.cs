@@ -24,7 +24,7 @@ public sealed class AuthenticationController : ApiController
     }
 
     [HttpPost("register")]
-    public async Task<IActionResult> Register(RegisterRequest request)
+    public async Task<IActionResult> Register([FromBody]RegisterRequest request)
     {
         var command = _mapper.Map<RegisterCommand>(request);
         var result = await _sender.Send(command);
@@ -35,7 +35,7 @@ public sealed class AuthenticationController : ApiController
     }
 
     [HttpPost("login")]
-    public async Task<IActionResult> Login(LoginRequest request)
+    public async Task<IActionResult> Login([FromBody]LoginRequest request)
     {
         var query = _mapper.Map<LoginQuery>(request);
         var result = await _sender.Send(query);
