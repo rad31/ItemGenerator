@@ -30,10 +30,10 @@ public static class DependencyInjection
         this IServiceCollection services,
         ConfigurationManager configuration)
     {
-        var JwtSettings = new JwtSettings();
-        configuration.Bind(JwtSettings.SectionName, JwtSettings);
+        var jwtSettings = new JwtSettings();
+        configuration.Bind(JwtSettings.SectionName, jwtSettings);
 
-        services.AddSingleton(Options.Create(JwtSettings));
+        services.AddSingleton(Options.Create(jwtSettings));
         services.AddSingleton<IJwtTokenGenerator, JwtTokenGenerator>();
 
         services.AddAuthentication(defaultScheme: JwtBearerDefaults.AuthenticationScheme)
@@ -43,10 +43,10 @@ public static class DependencyInjection
                 ValidateAudience = true,
                 ValidateLifetime = true,
                 ValidateIssuerSigningKey = true,
-                ValidIssuer = JwtSettings.Issuer,
-                ValidAudience = JwtSettings.Audience,
+                ValidIssuer = jwtSettings.Issuer,
+                ValidAudience = jwtSettings.Audience,
                 IssuerSigningKey = new SymmetricSecurityKey(
-                    Encoding.UTF8.GetBytes(JwtSettings.Secret))
+                    Encoding.UTF8.GetBytes(jwtSettings.Secret))
             });
 
         return services;

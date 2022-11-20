@@ -9,7 +9,7 @@ using System.Net;
 
 namespace ItemGenerator.Api.Common.Errors;
 
-public class ItemGeneratorProblemDetailsFactory : ProblemDetailsFactory
+public sealed class ItemGeneratorProblemDetailsFactory : ProblemDetailsFactory
 {
     private readonly ApiBehaviorOptions _options;
 

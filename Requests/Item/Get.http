@@ -1,0 +1,3 @@
+@host = http://localhost:5136
+
+GET {{host}}/item/Bow/Rare/99

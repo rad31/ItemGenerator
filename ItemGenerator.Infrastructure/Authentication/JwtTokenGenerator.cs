@@ -10,7 +10,7 @@ using ItemGenerator.Domain.Entities;
 
 namespace ItemGenerator.Infrastructure.Authentication;
 
-public class JwtTokenGenerator : IJwtTokenGenerator
+public sealed class JwtTokenGenerator : IJwtTokenGenerator
 {
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly JwtSettings _jwtSettings;

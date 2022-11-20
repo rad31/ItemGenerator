@@ -2,6 +2,7 @@ using System.Net;
 using ErrorOr;
 using ItemGenerator.Api.Common.Http;
 using ItemGenerator.Domain.Common.Errors;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 

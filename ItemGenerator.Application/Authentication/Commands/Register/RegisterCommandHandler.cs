@@ -8,7 +8,7 @@ using MediatR;
 
 namespace ItemGenerator.Application.Authentication.Commands.Register;
 
-public class RegisterCommandHandler
+public sealed class RegisterCommandHandler
     : IRequestHandler<RegisterCommand, ErrorOr<AuthenticationResult>>
 {
     private readonly IJwtTokenGenerator _jwtTokenGenerator;

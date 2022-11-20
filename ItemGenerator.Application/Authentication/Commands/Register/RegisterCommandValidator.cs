@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace ItemGenerator.Application.Authentication.Commands.Register;
 
-public class RegisterCommandValidator : AbstractValidator<RegisterCommand>
+public sealed class RegisterCommandValidator : AbstractValidator<RegisterCommand>
 {
     public RegisterCommandValidator()
     {

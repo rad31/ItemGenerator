@@ -2,7 +2,7 @@ using FluentValidation;
 
 namespace ItemGenerator.Application.Authentication.Queries.Login;
 
-public class LoginQueryValidator : AbstractValidator<LoginQuery>
+public sealed class LoginQueryValidator : AbstractValidator<LoginQuery>
 {
     public LoginQueryValidator()
     {

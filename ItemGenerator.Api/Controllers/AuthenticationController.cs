@@ -12,7 +12,7 @@ namespace ItemGenerator.Api.Controllers;
 
 [Route("auth")]
 [AllowAnonymous]
-public class AuthenticationController : ApiController
+public sealed class AuthenticationController : ApiController
 {
     private readonly ISender _sender;
     private readonly IMapper _mapper;

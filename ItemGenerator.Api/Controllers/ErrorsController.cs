@@ -4,7 +4,7 @@ using Microsoft.AspNetCore.Mvc;
 
 namespace ItemGenerator.Api.Controllers;
 
-public class ErrorsController : ApiController
+public sealed class ErrorsController : ApiController
 {
     [Route("/error")]
     public IActionResult Error()

@@ -6,7 +6,7 @@ using Mapster;
 
 namespace ItemGenerator.Api.Common.Mapping;
 
-public class AuthenticationMappingConfig : IRegister
+public sealed class AuthenticationMappingConfig : IRegister
 {
     public void Register(TypeAdapterConfig config)
     {

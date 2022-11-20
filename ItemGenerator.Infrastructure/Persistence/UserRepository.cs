@@ -3,7 +3,7 @@ using ItemGenerator.Application.Common.Interfaces.Persistence;
 
 namespace ItemGenerator.Infrastructure.Persistence;
 
-public class UserRepository : IUserRepository
+public sealed class UserRepository : IUserRepository
 {
     private static readonly List<User> _users = new ();
 
