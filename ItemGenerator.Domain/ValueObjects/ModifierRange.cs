@@ -2,18 +2,18 @@ using ItemGenerator.Domain.Enumerations;
 
 namespace ItemGenerator.Domain.ValueObjects;
 
-public sealed class ModifierRange
+public sealed class ModifierRange2
 {
-    public ModifierRange(
+    public ModifierRange2(
         ModifierType modifierType,
-        ushort minValue,
-        ushort maxValue)
+        ushort[] minValues,
+        ushort[] maxValues)
     {
         ModifierType = modifierType;
-        MinValue = minValue;
-        MaxValue = maxValue;
+        MinValues = minValues;
+        MaxValues = maxValues;
     }
     public readonly ModifierType ModifierType;
-    public readonly ushort MinValue;
-    public readonly ushort MaxValue;
+    public readonly ushort[] MinValues;
+    public readonly ushort[] MaxValues;
 }

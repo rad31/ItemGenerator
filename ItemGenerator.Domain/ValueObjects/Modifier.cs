@@ -6,19 +6,24 @@ public sealed class Modifier
 {
     private static readonly Random _random = new();
     public readonly ModifierType ModifierType;
-    public readonly ushort Value;
-    private Modifier(
+    public readonly ushort[] Values;
+
+    public Modifier(
         ModifierType modifierType,
-        ushort value)
+        ushort[] values)
     {
         ModifierType = modifierType;
-        Value = value;
+        Values = values;
     }
 
-    public static Modifier FromRange(ModifierRange range)
+    public static Modifier FromRange(ModifierRange2 range)
     {
+        var values = range.MinValues
+            .Zip(range.MaxValues, (min, max) => (ushort)_random.NextInt64(min, max + 1))
+            .ToArray();
+
         return new Modifier(
             range.ModifierType,
-            (ushort)_random.NextInt64(range.MinValue, range.MaxValue + 1));
+            values);
     }
 }

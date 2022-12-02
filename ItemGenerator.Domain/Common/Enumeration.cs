@@ -5,22 +5,22 @@ namespace ItemGenerator.Domain.Common;
 public abstract class Enumeration<TEnum> : IEquatable<Enumeration<TEnum>>
     where TEnum : Enumeration<TEnum>
 {
-    protected Enumeration(byte value, string name)
+    protected Enumeration(ushort value, string name)
     {
         Value = value;
         Name = name;
     }
 
-    public readonly byte Value;
+    public readonly ushort Value;
     public readonly string Name;
-    private static readonly Dictionary<byte, TEnum> _enumerations = CreateEnumerations();
+    private static readonly Dictionary<ushort, TEnum> _enumerations = CreateEnumerations();
 
     public static List<TEnum> Enumerations(Func<TEnum, bool> predicate)
     {
         return _enumerations.Values.Where(predicate).ToList();
     }
 
-    public static TEnum? FromValue(byte value)
+    public static TEnum? FromValue(ushort value)
     {
         return _enumerations.TryGetValue(value, out var enumeration)
             ? enumeration
@@ -50,7 +50,7 @@ public abstract class Enumeration<TEnum> : IEquatable<Enumeration<TEnum>>
         return Value.GetHashCode();
     }
 
-    private static Dictionary<byte, TEnum> CreateEnumerations()
+    private static Dictionary<ushort, TEnum> CreateEnumerations()
     {
         var enumerationType = typeof(TEnum);
 
