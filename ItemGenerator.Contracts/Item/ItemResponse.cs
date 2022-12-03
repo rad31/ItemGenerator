@@ -1,33 +1,28 @@
-
-
-using ItemGenerator.Domain.Enumerations;
+using ItemGenerator.Domain.Common;
 using ItemGenerator.Domain.ValueObjects;
+using ItemGenerator.Domain.Enumerations;
 
 namespace ItemGenerator.Contracts.Item;
 
 public sealed class ItemResponse
 {
-    public readonly Guid Id;
-    public readonly string Name;
-    public readonly string Rarity;
-    public readonly List<Affix> Affixes;
-    public readonly List<string> ItemText;
+    public Guid Id { get; init; }
+    public string Name { get; init; }
+    public string Rarity { get; init; }
+    public List<Affix> Affixes { get; init; }
+    public List<string> ItemText { get; init; }
     public ItemResponse(
         string name,
-        string rarity,
+        Rarity rarity,
         List<Affix> affixes)
     {
         Id = Guid.NewGuid();
         Name = name;
-        Rarity = rarity;
+        Rarity = rarity.Name;
         Affixes = affixes;
-        ItemText = new();
 
-        var uniqueAffixes = new Dictionary<AffixClass, ushort>();
+        var modifiers = Affix.CombineModifiers(affixes);
 
-        foreach (var affix in affixes)
-        {
-            // Affix.AddText(affix.AffixClass, ItemText);
-        }
+        ItemText = ModifierReader.GetText(modifiers);
     }
 }

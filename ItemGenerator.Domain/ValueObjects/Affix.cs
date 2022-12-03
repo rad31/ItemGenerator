@@ -5,10 +5,10 @@ namespace ItemGenerator.Domain.ValueObjects;
 
 public sealed class Affix
 {
-    public readonly AffixClass AffixClass;
-    public readonly List<Modifier> Modifiers;
+    public AffixClass AffixClass { get; init; }
+    public List<Modifier> Modifiers { get; init; }
 
-    private Affix(
+    public Affix(
         AffixClass affixClass,
         List<Modifier> modifiers)
     {
@@ -18,12 +18,19 @@ public sealed class Affix
 
     public static Affix FromRange(AffixRange affixRange)
     {
+        if (affixRange.AffixClass == ResistAll)
+        {
+            return new Affix(
+                affixRange.AffixClass,
+                affixRange.Modifiers.Select(m => Modifier.FromRangeSingleValue(m)).ToList());
+        }
+
         return new Affix(
             affixRange.AffixClass,
             affixRange.Modifiers.Select(m => Modifier.FromRange(m)).ToList());
     }
 
-    public static List<Modifier> Combine(List<Affix> affixes)
+    public static List<Modifier> CombineModifiers(List<Affix> affixes)
     {
         var modifiers = new List<Modifier>();
 

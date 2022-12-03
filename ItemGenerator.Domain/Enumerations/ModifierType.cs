@@ -1,70 +1,67 @@
-using ItemGenerator.Domain.Common;
-
 namespace ItemGenerator.Domain.Enumerations;
 
-public sealed class ModifierType : Enumeration<ModifierType>
+public enum ModifierType
 {
-    private ModifierType(byte value, string name) : base(value, name) { }
-    public static readonly ModifierType AddSockets = new(0, "AddSockets");
-    public static readonly ModifierType AttackRating = new(1, "AttackRating");
-    public static readonly ModifierType AttackRatingBasedOnCharacterLevel = new(2, "AttackRatingBasedOnCharacterLevel");
-    public static readonly ModifierType AttackRatingPercentBasedOnCharacterLevel = new(3, "AttackRatingPercentBasedOnCharacterLevel");
-    public static readonly ModifierType AttackRatingVsDemons = new(4, "AttackRatingVsDemons");
-    public static readonly ModifierType AttackRatingVsUndead = new(5, "AttackRatingVsUndead");
-    public static readonly ModifierType AttackSpeed = new(6, "AttackSpeed");
-    public static readonly ModifierType CauseMonsterFlee = new(7, "CauseMonsterFlee");
-    public static readonly ModifierType BlockRate = new(8, "BlockRate");
-    public static readonly ModifierType BlockChance = new(9, "BlockChance");
-    public static readonly ModifierType CastRate = new(10, "CastRate");
-    public static readonly ModifierType DamageEnhanced = new(11, "DamageEnhanced");
-    public static readonly ModifierType DamageEnhancedVsDemons = new(12, "DamageEnhancedVsDemons");
-    public static readonly ModifierType DamageEnhancedVsUndead = new(13, "DamageEnhancedVsUndead");
-    public static readonly ModifierType DamageCold = new(14, "DamageCold");
-    public static readonly ModifierType DamageFire = new(15, "DamageFire");
-    public static readonly ModifierType DamageLightning = new(16, "DamageLightning");
-    public static readonly ModifierType DamageMagicReduced = new(17, "DamageMagicReduced");
-    public static readonly ModifierType DamagePoison = new(18, "DamagePoison");
-    public static readonly ModifierType DamagePhysical = new(19, "DamagePhysical");
-    public static readonly ModifierType DamageReduced = new(20, "DamageReduced");
-    public static readonly ModifierType DamageReflect = new(21, "DamageReflect");
-    public static readonly ModifierType DamagePhysicalBasedOnCharacterLevel = new(22, "DamagePhysicalBasedOnCharacterLevel");
-    public static readonly ModifierType DamageTakenGoesToMana = new(23, "DamageTakenGoesToMana");
-    public static readonly ModifierType Defense = new(24, "Defense");
-    public static readonly ModifierType DefenseBasedOnCharacterLevel = new(25, "DefenseBasedOnCharacterLevel");
-    public static readonly ModifierType DefenseEnhanced = new(26, "DefenseEnhanced");
-    public static readonly ModifierType Dexterity = new(27, "Dexterity");
-    public static readonly ModifierType Energy = new(28, "Energy");
-    public static readonly ModifierType FreezeDuration = new(29, "FreezeDuration");
-    public static readonly ModifierType GoldFind = new(30, "GoldFind");
-    public static readonly ModifierType HitRecovery = new(31, "HitRecovery");
-    public static readonly ModifierType IgnoreTargetDefense = new(32, "IgnoreTargetDefense");
-    public static readonly ModifierType IncreasedStackSize = new(33, "IncreasedStackSize");
-    public static readonly ModifierType Indestructable = new(34, "Indestructable");
-    public static readonly ModifierType Knockback = new(35, "Knockback");
-    public static readonly ModifierType Life = new(36, "Life");
-    public static readonly ModifierType LifeBasedOnCharacterLevel = new(37, "LifeBasedOnCharacterLevel");
-    public static readonly ModifierType LifeLeech = new(38, "LifeLeech");
-    public static readonly ModifierType LifeRegeneration = new(39, "LifeRegeneration");
-    public static readonly ModifierType LightRadius = new(40, "LightRadius");
-    public static readonly ModifierType MagicFind = new(41, "MagicFind");
-    public static readonly ModifierType Mana = new(42, "Mana");
-    public static readonly ModifierType ManaBasedOnCharacterLevel = new(43, "ManaBasedOnCharacterLevel");
-    public static readonly ModifierType ManaLeech = new(44, "ManaLeech");
-    public static readonly ModifierType ManaOnKill = new(45, "ManaOnKill");
-    public static readonly ModifierType PoisonLengthReduced = new(46, "PoisonLengthReduced");
-    public static readonly ModifierType PreventMonsterHeal = new(47, "PreventMonsterHeal");
-    public static readonly ModifierType QuantityReplish = new(48, "QuantityReplish");
-    public static readonly ModifierType QuantityIncreased = new(49, "QuantityIncreased");
-    public static readonly ModifierType RequirementReduction = new(50, "RequirementReduction");
-    public static readonly ModifierType ResistAll = new(51, "ResistAll");
-    public static readonly ModifierType RunWalkSpeed = new(52, "RunWalkSpeed");
-    public static readonly ModifierType SelfRepair = new(53, "SelfRepair");
-    public static readonly ModifierType Skills = new(54, "Skills");
-    public static readonly ModifierType SpellCharges = new(55, "SpellCharges");
-    public static readonly ModifierType SpellProc = new(56, "SpellProc");
-    public static readonly ModifierType Stamina = new(57, "Stamina");
-    public static readonly ModifierType StaminaRegeneration = new(58, "StaminaRegeneration");
-    public static readonly ModifierType StaminaDrain = new(59, "StaminaDrain");
-    public static readonly ModifierType Strength = new(60, "Strength");
-    public static readonly ModifierType Vitality = new(61, "Vitality");
+    AddSockets,
+    AttackRating,
+    AttackRatingBasedOnCharacterLevel,
+    AttackRatingPercentBasedOnCharacterLevel,
+    AttackRatingVsDemons,
+    AttackRatingVsUndead,
+    AttackSpeed,
+    CauseMonsterFlee,
+    BlockRate,
+    BlockChance,
+    CastRate,
+    DamageEnhanced,
+    DamageEnhancedVsDemons,
+    DamageEnhancedVsUndead,
+    DamageCold,
+    DamageFire,
+    DamageLightning,
+    DamageMagicReduced,
+    DamagePoison,
+    DamagePhysical,
+    DamageReduced,
+    DamageReflect,
+    DamagePhysicalBasedOnCharacterLevel,
+    DamageTakenGoesToMana,
+    Defense,
+    DefenseBasedOnCharacterLevel,
+    DefenseEnhanced,
+    Dexterity,
+    Energy,
+    FreezeDuration,
+    GoldFind,
+    HitRecovery,
+    IgnoreTargetDefense,
+    IncreasedStackSize,
+    Indestructable,
+    Knockback,
+    Life,
+    LifeBasedOnCharacterLevel,
+    LifeLeech,
+    LifeRegeneration,
+    LightRadius,
+    MagicFind,
+    Mana,
+    ManaBasedOnCharacterLevel,
+    ManaLeech,
+    ManaOnKill,
+    PoisonLengthReduced,
+    PreventMonsterHeal,
+    QuantityReplish,
+    QuantityIncreased,
+    RequirementReduction,
+    ResistAll,
+    RunWalkSpeed,
+    SelfRepair,
+    Skills,
+    SpellCharges,
+    SpellProc,
+    Stamina,
+    StaminaRegeneration,
+    StaminaDrain,
+    Strength,
+    Vitality,
 }

@@ -23,32 +23,46 @@ public sealed class GenerateItemQueryHandler
     {
         await Task.CompletedTask;
 
-        var prefixRanges = AffixRange.Enumerations(e => e.Constraints.IsApplicable(
-            AffixType.Prefix,
-            query.Rarity!,
-            query.Level,
-            query.ItemType!));
+        var numPrefixes = (int)_random.NextInt64(2, 3);
+        var numSuffixes = (int)_random.NextInt64(2, 3);
 
-        var prefixes = new List<Affix>();
-
-        for (var i = _random.NextInt64(0, 3); i >= 0; i--)
-        {
-            var index = (int)_random.NextInt64(0, prefixRanges.Count);
-            var prefixRange = prefixRanges[index];
-
-            while (prefixes.Any(p => p.AffixClass == prefixRange.AffixClass))
-            {
-                index = (int)_random.NextInt64(0, prefixRanges.Count);
-                prefixRange = prefixRanges[index];
-            }
-
-            prefixes.Add(Affix.FromRange(prefixRange));
-        }
+        var affixes = GenerateAffixes(query, AffixType.Prefix, numPrefixes);
+        affixes.AddRange(GenerateAffixes(query, AffixType.Suffix, numSuffixes));
 
         return new Item(
             "Item name",
             query.Rarity!,
             _dateTimeProvider.UtcNow,
-            prefixes);
+            affixes);
+    }
+
+    private static List<Affix> GenerateAffixes(
+        GenerateItemQuery query,
+        AffixType affixType,
+        int numAffixes)
+    {
+        List<Affix> affixes = new();
+
+        var affixRanges = AffixRange.Enumerations(e => e.Constraints.IsApplicable(
+            affixType,
+            query.Rarity!,
+            query.Level,
+            query.ItemType!));
+
+        for (var i = 0; i < numAffixes; i++)
+        {
+            var index = (int)_random.NextInt64(0, affixRanges.Count);
+            var affixRange = affixRanges[index];
+
+            while (affixes.Any(p => p.AffixClass == affixRange.AffixClass))
+            {
+                index = (int)_random.NextInt64(0, affixRanges.Count);
+                affixRange = affixRanges[index];
+            }
+
+            affixes.Add(Affix.FromRange(affixRange));
+        }
+
+        return affixes;
     }
 }

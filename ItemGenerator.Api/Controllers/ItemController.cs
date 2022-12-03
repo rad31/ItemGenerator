@@ -1,6 +1,6 @@
-using ItemGenerator.Domain.Enumerations;
-using ItemGenerator.Application.Common.Interfaces.Services;
 using ItemGenerator.Application.ItemGeneration.Queries.GenerateItem;
+using ItemGenerator.Contracts.Item;
+using ItemGenerator.Domain.Enumerations;
 using MapsterMapper;
 using MediatR;
 using Microsoft.AspNetCore.Mvc;
@@ -37,7 +37,7 @@ public sealed class ItemController : ApiController
         var result = await _sender.Send(query);
 
         return result.Match(
-            item => Ok(item),
+            item => Ok(_mapper.Map<ItemResponse>(item).ItemText),
             errors => Problem(errors));
     }
 }
